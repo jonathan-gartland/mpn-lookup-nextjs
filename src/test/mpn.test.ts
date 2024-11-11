@@ -5,7 +5,5 @@ import { render, fireEvent } from "@testing-library/react";
 describe("MPN Lookup", () => {
   test("MPN Lookup", () => {
     expect(1).toEqual(1);
-    // const { getByText } = render(<MyComponent testtype={'quanti2k'}/>);
-    // expect(getByText("QuantiTray2000® MPN")).toBeInTheDocument();
   });
 });

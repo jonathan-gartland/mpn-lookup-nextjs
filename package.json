@@ -18,9 +18,11 @@
     "test": "jest"
   },
   "dependencies": {
+    "@types/react-router-dom": "^5.3.3",
     "next": "15.0.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-router-dom": "^6.28.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",
