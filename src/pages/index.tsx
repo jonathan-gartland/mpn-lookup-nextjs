@@ -20,16 +20,24 @@ export default function Home() {
   const renderView = (
     <>
       <Link className="border" href="/quantitray">
-        <button>QuantiTray&reg;</button>
+        <button id="quantitray" data-testid="qt-button">
+          QuantiTray&reg;
+        </button>
       </Link>
       <Link className="border" href="/quantitray2k">
-        <button>QuantiTray2000&reg;</button>
+        <button id="quantitray2k" data-testid="qt2k-button">
+          QuantiTray2000&reg;
+        </button>
       </Link>
       <Link className="border" href="/legiolert">
-        <button>Legiolert</button>
+        <button id="legiolert" data-testid="legio-button">
+          Legiolert
+        </button>
       </Link>
       <Link className="border" href="/about">
-        <button>About</button>
+        <button id="about" data-testid="about-button">
+          About
+        </button>
       </Link>
     </>
   );
