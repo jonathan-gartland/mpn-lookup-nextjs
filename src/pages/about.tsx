@@ -1,5 +1,5 @@
 import Link from "next/link";
-import MyComponent from "@/components/MyComponent";
+import LookupComponent from "@/components/LookupComponent";
 import React from "react";
 
 const About = () => {

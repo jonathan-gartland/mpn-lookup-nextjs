@@ -1,4 +1,4 @@
-import MyComponent from "@/components/MyComponent";
+import LookupComponent from "@/components/LookupComponent";
 import React from "react";
 
 export default function Quantitray() {
@@ -9,7 +9,7 @@ export default function Quantitray() {
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <div>
           <h1 data-testid="qt-header">QuantiTray&reg; MPN</h1>
-          <MyComponent testtype={"quanti"} />
+          <LookupComponent data-testid="mcqt" testtype={"quanti"} />
         </div>
       </main>
     </div>

@@ -5,7 +5,7 @@ interface MyComponentProps {
   testtype: string;
 }
 
-const MyComponent: React.FC<MyComponentProps> = ({ testtype }) => {
+const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
   const QtDiv = () => {
     const [inputQt, setInputQt] = useState(0);
     const handleChangeQt = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -157,4 +157,4 @@ const MyComponent: React.FC<MyComponentProps> = ({ testtype }) => {
   );
 };
 
-export default MyComponent;
+export default LookupComponent;

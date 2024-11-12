@@ -1,7 +1,7 @@
 import localFont from "next/font/local";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import MyComponent from "@/components/MyComponent";
+import LookupComponent from "@/components/LookupComponent";
 
 import React from "react";
 
