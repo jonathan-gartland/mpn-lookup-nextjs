@@ -62,8 +62,7 @@ const MyComponent: React.FC<MyComponentProps> = ({ testtype }) => {
 
     return (
       <div>
-        {/*<h1>{testtype}</h1>*/}
-        <p>Positive Wells</p>
+        <p data-testid="pos-well-title">Positive Wells</p>
         <div className="flex flex-row space-x-1.5">
           <div>
             <p>Large</p>
@@ -118,7 +117,7 @@ const MyComponent: React.FC<MyComponentProps> = ({ testtype }) => {
 
     return (
       <div>
-        <p>Positive Wells</p>
+        <p data-testid="pos-well-title">Positive Wells</p>
         <div className="flex flex-row space-x-1.5">
           <div>
             <p>Large</p>

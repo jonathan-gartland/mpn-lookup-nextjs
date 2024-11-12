@@ -23,6 +23,7 @@ body {
 input {
   width: 50px;
   background: darkgray;
+  text-align: center;
 }
 
 button {
