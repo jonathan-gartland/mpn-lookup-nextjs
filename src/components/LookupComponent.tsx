@@ -27,11 +27,13 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
           <>
             <h1>
               MPN :{" "}
-              {mpnVal && (mpnVal[0] === "<1.0" || mpnVal[0] === ">200.5")
-                ? mpnVal[0] === "<1.0"
-                  ? "< 1.0"
-                  : "> 200.5"
-                : mpnVal[0]}
+              {mpnVal.length === 0
+                ? "Invalid Count!"
+                : mpnVal && (mpnVal[0] === "<1.0" || mpnVal[0] === ">200.5")
+                  ? mpnVal[0] === "<1.0"
+                    ? "< 1.0"
+                    : "> 200.5"
+                  : mpnVal[0]}
             </h1>
             <div>95% Confidence</div>
             <div className="flex row space-x-1.5">
