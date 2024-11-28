@@ -1,11 +1,27 @@
 import React, { useState } from "react";
 import { getQt2KMpn, getQtLegio, getQtMpn } from "@/util/mpn.lookup";
+// import { is } from "@babel/types";
 
 interface MyComponentProps {
   testtype: string;
 }
 
+interface LoadingProps {
+  message?: string;
+}
+
+const Loading: React.FC<LoadingProps> = ({ message = "Loading..." }) => {
+  return (
+    <div className="loading-container">
+      <div className="spinner"></div>
+      {message && <p>{message}</p>}
+    </div>
+  );
+};
+
 const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
+  const [isLoading, setIsLoading] = useState(true);
+
   const QtDiv = () => {
     const [inputQt, setInputQt] = useState(0);
     const handleChangeQt = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,15 +105,31 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
             />
           </div>
         </div>
-        {testtype === "quanti2k" && (
+
+        {testtype === "quanti2k" && mpnVal !== undefined && (
           <>
             <div>
-              <h1>MPN : {mpnVal !== undefined && mpnVal[0]}</h1>
+              <h1>
+                MPN :{" "}
+                {mpnVal.length === 0
+                  ? "Invalid Count!"
+                  : mpnVal && (mpnVal[0] === "<1.0" || mpnVal[0] === ">2419.6")
+                    ? mpnVal[0] === "<1.0"
+                      ? "< 1.0"
+                      : "> 2419.6"
+                    : mpnVal[0]}
+              </h1>
             </div>
+
             <div>95% Confidence</div>
             <div className="flex row space-x-1.5">
               <div>Low: {mpnVal && mpnVal[1]}</div>
-              <div>High: {mpnVal && mpnVal[2]}</div>
+              <div>
+                High:{" "}
+                {mpnVal && mpnVal[2] === "infinite"
+                  ? "Infinite"
+                  : mpnVal && mpnVal[2]}
+              </div>
             </div>
           </>
         )}
@@ -150,13 +182,26 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
       </div>
     );
   };
-  return testtype === "quanti" ? (
-    <div>{QtDiv()}</div>
-  ) : testtype === "quanti2k" ? (
-    <div>{Qt2kDiv()}</div>
-  ) : (
-    <div>{QtLDiv()}</div>
+
+  return (
+    <div>
+      {/*{isLoading && <Loading />}*/}
+      {/*{!isLoading && */}
+      {testtype === "quanti" ? (
+        <div>{QtDiv()}</div>
+      ) : testtype === "quanti2k" ? (
+        <div>{Qt2kDiv()}</div>
+      ) : (
+        <div>{QtLDiv()}</div>
+      )}
+    </div>
   );
 };
 
 export default LookupComponent;
+
+/*
+testing tips
+
+https://stackoverflow.com/questions/63534192/how-i-test-useeffect-with-isloading-state
+ */

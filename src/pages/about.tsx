@@ -9,7 +9,7 @@ const About = () => {
     >
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <div>
-          <h1>About</h1>
+          <h1>How to use the App:</h1>
           <br />
           <p>Click on the test you need</p>
           <p>to perform to get started.</p>
@@ -17,8 +17,10 @@ const About = () => {
           <p>Enter the number of pos-</p>
           <p>itive wells in the sample.</p>
           <br />
-          <p>Most Probable Number</p>
-          <p>is displayed.</p>
+          <p>Now the Most Probable</p>
+          <p>Number is displayed. If a</p>
+          <p>confidence range exists, it</p>
+          <p>will also display.</p>
           <br />
           <Link
             style={{ color: "lightblue" }}

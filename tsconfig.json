@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "declaration": true,
+    "outDir": "./dist",
     "lib": [
       "dom",
       "dom.iterable",
@@ -34,9 +36,10 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "commitlint.config.ts"
+    "commitlint.config.ts",
+    "./src/components/**/*",
   ],
   "exclude": [
-    "node_modules"
+    "node_modules", "jest.config.ts"
   ]
 }
