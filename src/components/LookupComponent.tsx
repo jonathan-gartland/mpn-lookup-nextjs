@@ -30,7 +30,9 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
     const mpnVal = getQtMpn(inputQt) !== undefined ? getQtMpn(inputQt) : [];
     return (
       <div>
-        <p data-testid="pos-well-title">Positive Wells</p>
+        <p id="qt-pos-wells" data-test-id="pos-well-title">
+          Positive Wells
+        </p>
         <input
           type="numeric"
           min={0}
@@ -151,7 +153,9 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
 
     return (
       <div>
-        <p data-testid="pos-well-title">Positive Wells</p>
+        <p id="positive-well-text" data-testid="pos-well-title">
+          Positive Wells
+        </p>
         <div className="flex flex-row space-x-1.5">
           <div>
             <p>Large</p>
