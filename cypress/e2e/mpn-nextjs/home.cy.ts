@@ -16,4 +16,24 @@ describe("MPN Lookup NextJS App", () => {
       });
     }
   );
+
+  it("should navigate to QuantiTray page", () => {
+    cy.get("button[id='quantitray']").click();
+    cy.url().should("include", "/quantitray");
+  });
+
+  it("should navigate to QuantiTray2000 page", () => {
+    cy.get("button[id='quantitray2000']").click();
+    cy.url().should("include", "/quantitray2k");
+  });
+
+  it("should navigate to Legiolert page", () => {
+    cy.get("button[id='legiolert']").click();
+    cy.url().should("include", "/legiolert");
+  });
+
+  it("should navigate to About page", () => {
+    cy.get("button[id='about']").click();
+    cy.url().should("include", "/about");
+  });
 });

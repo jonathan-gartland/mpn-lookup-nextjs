@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 describe("QT test stub", () => {
-  beforeEach(() => {
+  before(() => {
     cy.visit("http://localhost:3000");
   });
 
