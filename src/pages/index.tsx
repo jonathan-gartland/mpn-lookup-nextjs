@@ -25,7 +25,7 @@ export default function Home() {
         </button>
       </Link>
       <Link className="border" href="/quantitray2k">
-        <button id="quantitray2k" data-testid="qt2k-button">
+        <button id="quantitray2000" data-testid="qt2k-button">
           QuantiTray2000&reg;
         </button>
       </Link>
