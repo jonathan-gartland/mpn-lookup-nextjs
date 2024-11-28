@@ -40,6 +40,7 @@
     "./src/components/**/*",
   ],
   "exclude": [
-    "node_modules", "jest.config.ts"
+    "node_modules", "jest.config.ts", "./cypress.config.ts", "cypress",
+    "**/*.cy.tsx"
   ]
 }
