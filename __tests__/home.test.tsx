@@ -22,12 +22,4 @@ describe("Home", () => {
     render(<Home />);
     expect(screen.findAllByText("Legiolert")).toBeTruthy();
   });
-  // it("renders a button for the QuantiTray2000 MPN Lookup", () => {
-  //   render(<Home />);
-  //   expect(screen.getByRole("button")).toHaveTextContent("QuantiTray2000&reg;");
-  // });
-  // it("renders a button for the Legiolert MPN Lookup", () => {
-  //   render(<Home />);
-  //   expect(screen.getByRole("button")).toHaveTextContent("Legiolert");
-  // });
 });
