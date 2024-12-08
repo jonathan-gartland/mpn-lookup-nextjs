@@ -41,5 +41,6 @@
   ],
   "exclude": [
     "node_modules", "jest.config.ts"
-  ]
+  ],
+  "types": ["@types/node", "@types/react", "@types/react-dom", "@types/jest", "@testing-library/jest-dom"]
 }

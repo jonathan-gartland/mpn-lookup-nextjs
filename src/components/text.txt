@@ -1,17 +1,33 @@
 import React, { useState } from "react";
-import { getMpn } from "@/util/mpn.lookup";
+import { getQt2KMpn, getQtLegio, getQtMpn } from "@/util/mpn.lookup";
+// import { is } from "@babel/types";
 
 interface MyComponentProps {
-  testtype: string; // quanti, quanti2k, legiolert
+  testtype: string;
 }
 
+interface LoadingProps {
+  message?: string;
+}
+
+const Loading: React.FC<LoadingProps> = ({ message = "Loading..." }) => {
+  return (
+    <div className="loading-container">
+      <div className="spinner"></div>
+      {message && <p>{message}</p>}
+    </div>
+  );
+};
+
 const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
+  const [isLoading, setIsLoading] = useState(true);
+
   const QtDiv = () => {
     const [inputQt, setInputQt] = useState(0);
     const handleChangeQt = (event: React.ChangeEvent<HTMLInputElement>) => {
       setInputQt(Number(event.target.value));
     };
-    const mpnVal = getMpn("qt", { large: inputQt, small: 0 }) || [];
+    const mpnVal = getQtMpn(inputQt) !== undefined ? getQtMpn(inputQt) : [];
     return (
       <div>
         <p data-testid="pos-well-title">Positive Wells</p>
@@ -22,20 +38,31 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
           value={inputQt}
           onChange={handleChangeQt}
         />
-        {testtype === "quanti" && mpnVal.length > 0 && (
+        {testtype === "quanti" && mpnVal !== undefined && (
           <>
-            <h1>MPN : {mpnVal && mpnVal[0]}</h1>
+            <h1>
+              MPN :{" "}
+              {mpnVal.length === 0
+                ? "Invalid Count!"
+                : mpnVal && (mpnVal[0] === "<1.0" || mpnVal[0] === ">200.5")
+                  ? mpnVal[0] === "<1.0"
+                    ? "< 1.0"
+                    : "> 200.5"
+                  : mpnVal[0]}
+            </h1>
             <div>95% Confidence</div>
             <div className="flex row space-x-1.5">
               <div>Low: {mpnVal && mpnVal[1]}</div>
-              <div>High: {mpnVal && mpnVal[2]}</div>
+              <div>
+                High:{" "}
+                {mpnVal && mpnVal[2] === "infinite" ? "Infinite" : mpnVal[2]}
+              </div>
             </div>
           </>
         )}
       </div>
     );
   };
-
   const Qt2kDiv = () => {
     const [inputQt2kL, setInputQt2kL] = useState(0);
     const [inputQt2kS, setInputQt2kS] = useState(0);
@@ -46,7 +73,10 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
       setInputQt2kS(Number(event.target.value));
     };
     const mpnVal =
-      getMpn("qt2k", { large: inputQt2kL, small: inputQt2kS }) || [];
+      getQt2KMpn(inputQt2kL, inputQt2kS) !== undefined
+        ? getQt2KMpn(inputQt2kL, inputQt2kS)
+        : [];
+
     return (
       <div>
         <p data-testid="pos-well-title">Positive Wells</p>
@@ -58,6 +88,7 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
               min={0}
               max={49}
               value={inputQt2kL}
+              defaultValue={0}
               onChange={handleChangeQt2kL}
             />
           </div>
@@ -68,18 +99,35 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
               min={0}
               max={49}
               value={inputQt2kS}
+              defaultValue={0}
               onChange={handleChangeQt2kS}
             />
           </div>
         </div>
-        {testtype === "quanti2k" && mpnVal.length > 0 && (
+
+        {testtype === "quanti2k" && mpnVal !== undefined && (
           <>
-            <h1>MPN : {mpnVal && mpnVal[0]}</h1>
+            <div>
+              <h1>
+                MPN :{" "}
+                {mpnVal.length === 0
+                  ? "Invalid Count!"
+                  : mpnVal && (mpnVal[0] === "<1.0" || mpnVal[0] === ">2419.6")
+                    ? mpnVal[0] === "<1.0"
+                      ? "< 1.0"
+                      : "> 2419.6"
+                    : mpnVal[0]}
+              </h1>
+            </div>
+
             <div>95% Confidence</div>
             <div className="flex row space-x-1.5">
-              <div>Low: {mpnVal[1]}</div>
+              <div>Low: {mpnVal && mpnVal[1]}</div>
               <div>
-                High: {mpnVal[2] === "infinite" ? "Infinite" : mpnVal[2]}
+                High:{" "}
+                {mpnVal && mpnVal[2] === "infinite"
+                  ? "Infinite"
+                  : mpnVal && mpnVal[2]}
               </div>
             </div>
           </>
@@ -100,7 +148,10 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
       setInputLS(Number(event.target.value));
     };
 
-    const mpnVal = getMpn("legio", { large: inputLL, small: inputLS }) || [];
+    const mpnVal =
+      getQtLegio(inputLL, inputLS) !== undefined
+        ? getQtLegio(inputLL, inputLS)
+        : [];
 
     return (
       <div>
@@ -113,6 +164,7 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
               min={0}
               max={6}
               value={inputLL}
+              defaultValue={0}
               onChange={handleChangeLL}
             />
           </div>
@@ -123,11 +175,24 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
               min={0}
               max={90}
               value={inputLS}
+              defaultValue={0}
               onChange={handleChangeLS}
             />
           </div>
         </div>
-        {testtype === "legiolert" && mpnVal && <h1>MPN : {mpnVal}</h1>}
+        {testtype === "legiolert" && (
+          <h1>
+            MPN :{" "}
+            {mpnVal && mpnVal.length === 0
+              ? "Invalid Count!"
+              : mpnVal && (mpnVal[0] === "<1.0" || mpnVal[0] === ">2419.6")
+                ? mpnVal[0] === "<1.0"
+                  ? "< 1.0"
+                  : "> 2419.6"
+                : mpnVal && mpnVal[0]}
+          </h1>
+        )}
+        )
       </div>
     );
   };
@@ -138,9 +203,9 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
         <div>{QtDiv()}</div>
       ) : testtype === "quanti2k" ? (
         <div>{Qt2kDiv()}</div>
-      ) : testtype === "legiolert" ? (
+      ) : (
         <div>{QtLDiv()}</div>
-      ) : undefined}
+      )}
     </div>
   );
 };
@@ -148,83 +213,7 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
 export default LookupComponent;
 
 /*
-import React, { useState } from "react";
-import { getMpn } from "@/util/mpn.lookup";
+testing tips
 
-interface MyComponentProps {
-  testtype: string;
-}
-
-const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
-  const [inputLarge, setInputLarge] = useState(0);
-  const [inputSmall, setInputSmall] = useState(0);
-
-  const handleChangeLarge = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputLarge(Number(event.target.value));
-  };
-
-  const handleChangeSmall = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputSmall(Number(event.target.value));
-  };
-
-  const mpnVal =
-    getMpn(testtype, { large: inputLarge, small: inputSmall }) || [];
-
-  return (
-    <div>
-      <p data-testid="pos-well-title">Positive Wells</p>
-      {testtype === "quanti" && (
-        <input
-          type="numeric"
-          min={0}
-          max={51}
-          value={inputLarge}
-          onChange={handleChangeLarge}
-        />
-      )}
-      {(testtype === "quanti2k" || testtype === "legiolert") && (
-        <div className="flex flex-row space-x-1.5">
-          <div>
-            <p>Large</p>
-            <input
-              type="numeric"
-              min={0}
-              max={testtype === "quanti2k" ? 49 : 6}
-              value={inputLarge}
-              onChange={handleChangeLarge}
-            />
-          </div>
-          <div>
-            <p>Small</p>
-            <input
-              type="numeric"
-              min={0}
-              max={testtype === "quanti2k" ? 48 : 90}
-              value={inputSmall}
-              onChange={handleChangeSmall}
-            />
-          </div>
-        </div>
-      )}
-      {mpnVal.length > 0 && (
-        <>
-          <h1>
-            MPN :{" "}
-            {mpnVal[0] === "<1.0" || mpnVal[0] === ">2419.6"
-              ? mpnVal[0]
-              : mpnVal[0]}
-          </h1>
-          <div>95% Confidence</div>
-          <div className="flex row space-x-1.5">
-            <div>Low: {mpnVal[1]}</div>
-            <div>High: {mpnVal[2] === "infinite" ? "Infinite" : mpnVal[2]}</div>
-          </div>
-        </>
-      )}
-    </div>
-  );
-};
-
-export default LookupComponent;
-/*
+https://stackoverflow.com/questions/63534192/how-i-test-useeffect-with-isloading-state
  */

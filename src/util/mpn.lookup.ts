@@ -1,9 +1,7 @@
-type Mpn =
-  | Array<(string | number) | number | (string | number)>
-  | undefined;
+type Mpn = Array<(string | number) | number | (string | number)> | undefined;
 
 const mpn: Mpn[] = [
-  ['<1.0', 0, 3.7],
+  ["< 1.0", 0, 3.7],
   [1, 0.3, 5.6],
   [2, 0.6, 7.3],
   [3.1, 1.1, 9],
@@ -54,11 +52,11 @@ const mpn: Mpn[] = [
   [144.5, 102.3, 224.1],
   [165.2, 115.2, 272.2],
   [200.5, 135.8, 387.6],
-  ['>200.5', 146.1, 'infinite'],
+  ["> 200.5", 146.1, "Infinite"],
 ];
 
 const mpn2k: Mpn[] = [
-  ['<1', 0.0, 3.7],
+  ["< 1", 0.0, 3.7],
   [1.0, 0.0, 3.7],
   [2.0, 0.3, 5.6],
   [3.0, 0.6, 7.3],
@@ -2507,11 +2505,11 @@ const mpn2k: Mpn[] = [
   [1732.9, 1167.7, 2709.5],
   [1986.3, 1222.0, 3300.2],
   [2419.6, 1630.4, 4716.1],
-  ['>2419.6', 1439.5, 'infinite'],
+  ["> 2419.6", 1439.5, "Infinite"],
 ];
 
 const mpnLegio: any = [
-  '<1',
+  "< 1",
   1.1,
   2.3,
   3.9,
@@ -3147,22 +3145,35 @@ const mpnLegio: any = [
   181.9,
   253.0,
   420.8,
-  '>2272.6',
+  "> 2272.6",
 ];
 
-export const getQtMpn = (inCount: number): Mpn => {
+const getQtMpn = (inCount: number): Mpn => {
   if (inCount < 0 || inCount > 51) return undefined;
   return mpn[inCount];
 };
 
-export const getQt2KMpn = (inLargePos: number, inSmallPos: number): Mpn => {
+const getQt2KMpn = (inLargePos: number, inSmallPos: number): Mpn => {
   if (inLargePos > 49 || inLargePos < 0 || inSmallPos > 48 || inSmallPos < 0)
     return undefined;
   return mpn2k[inLargePos * 49 + inSmallPos];
 };
 
-export const getQtLegio = (inLargePos: number, inSmallPos: number): Mpn => {
+const getQtLegio = (inLargePos: number, inSmallPos: number): Mpn => {
   if (inLargePos < 0 || inLargePos > 6 || inSmallPos < 0 || inSmallPos > 90)
     return undefined;
   return mpnLegio[inSmallPos * 7 + inLargePos];
+};
+
+export const getMpn = (
+  testType: string,
+  inCount: { large: number; small: number }
+) => {
+  return testType === "qt"
+    ? getQtMpn(inCount.large)
+    : testType === "qt2k"
+      ? getQt2KMpn(inCount.large, inCount.small)
+      : testType === "legio"
+        ? getQtLegio(inCount.large, inCount.small)
+        : undefined;
 };
