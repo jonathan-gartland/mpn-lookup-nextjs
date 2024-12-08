@@ -1,7 +1,4 @@
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
-import Home from "@/pages/index.tsx.txt";
-import Quantitray from "@/pages/quantitray";
 
 describe("QuantiTray View", () => {
   it("renders a heading", () => {
