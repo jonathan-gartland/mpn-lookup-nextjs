@@ -148,6 +148,11 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
       setInputLS(Number(event.target.value));
     };
 
+    const mpnValL =
+      getQtLegio(inputLL, inputLS) !== undefined
+        ? getQtLegio(inputLL, inputLS)
+        : [];
+
     return (
       <div>
         <p data-testid="pos-well-title">Positive Wells</p>
@@ -176,7 +181,16 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
           </div>
         </div>
         {testtype === "legiolert" && (
-          <h1>MPN : {getQtLegio(inputLL, inputLS)}</h1>
+          <h1>
+            MPN :{" "}
+            {mpnValL === undefined || mpnValL.length === 0
+              ? "Invalid Count!"
+              : mpnValL && (mpnValL[0] === "<1.0" || mpnValL[0] === ">2272.6")
+                ? mpnValL[0] === "<1.0"
+                  ? "< 1.0"
+                  : "> 2272.6"
+                : mpnValL[0]}
+          </h1>
         )}
       </div>
     );
@@ -184,8 +198,6 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
 
   return (
     <div>
-      {/*{isLoading && <Loading />}*/}
-      {/*{!isLoading && */}
       {testtype === "quanti" ? (
         <div>{QtDiv()}</div>
       ) : testtype === "quanti2k" ? (
