@@ -148,7 +148,7 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
       setInputLS(Number(event.target.value));
     };
 
-    const mpnValL =
+    const mpnVal =
       getQtLegio(inputLL, inputLS) !== undefined
         ? getQtLegio(inputLL, inputLS)
         : [];
@@ -183,13 +183,13 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
         {testtype === "legiolert" && (
           <h1>
             MPN :{" "}
-            {mpnValL === undefined || mpnValL.length === 0
+            {mpnVal.length === 0
               ? "Invalid Count!"
-              : mpnValL && (mpnValL[0] === "<1" || mpnValL[0] === ">2272.6")
-                ? mpnValL[0] === "<1"
+              : mpnVal && (mpnVal[0] === "<1.0" || mpnVal[0] === ">2419.6")
+                ? mpnVal[0] === "<1.0"
                   ? "< 1.0"
-                  : "> 2272.6"
-                : mpnValL[0]}
+                  : "> 2419.6"
+                : mpnVal[0]}
           </h1>
         )}
       </div>
