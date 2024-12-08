@@ -186,7 +186,7 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
             {mpnValL === undefined || mpnValL.length === 0
               ? "Invalid Count!"
               : mpnValL && (mpnValL[0] === "<1" || mpnValL[0] === ">2272.6")
-                ? mpnValL[0] === "<1.0"
+                ? mpnValL[0] === "<1"
                   ? "< 1.0"
                   : "> 2272.6"
                 : mpnValL[0]}
