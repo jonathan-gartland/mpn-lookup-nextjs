@@ -20,7 +20,8 @@ const About = () => {
           <p>Now the Most Probable</p>
           <p>Number is displayed. If a</p>
           <p>confidence range exists, it</p>
-          <p>will also display.</p>
+          <p>Have Fun!</p>
+
           <br />
           <Link
             style={{ color: "lightblue" }}

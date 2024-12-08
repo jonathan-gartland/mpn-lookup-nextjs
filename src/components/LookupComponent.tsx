@@ -36,7 +36,6 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
           min={0}
           max={51}
           value={inputQt}
-          defaultValue={0}
           onChange={handleChangeQt}
         />
         {testtype === "quanti" && mpnVal !== undefined && (
