@@ -14,6 +14,9 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
     const mpnVal = getMpn("qt", { large: inputQt, small: 0 }) || [];
     return (
       <div>
+        <h1 className="" data-testid="qt-header">
+          QuantiTray&reg; MPN
+        </h1>
         <p data-testid="pos-well-title">Positive Wells</p>
         <input
           type="numeric"
@@ -49,6 +52,7 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
       getMpn("qt2k", { large: inputQt2kL, small: inputQt2kS }) || [];
     return (
       <div>
+        <h1 data-testid="qt2k-header">QuantiTray2000&reg; MPN</h1>
         <p data-testid="pos-well-title">Positive Wells</p>
         <div className="flex flex-row space-x-1.5">
           <div>
@@ -103,7 +107,8 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
     const mpnVal = getMpn("legio", { large: inputLL, small: inputLS }) || [];
 
     return (
-      <div>
+      <div className="text-center text-lg">
+        <h1 data-testid="legio-header">Legiolert MPN</h1>
         <p data-testid="pos-well-title">Positive Wells</p>
         <div className="flex flex-row space-x-1.5">
           <div>
@@ -146,85 +151,3 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
 };
 
 export default LookupComponent;
-
-/*
-import React, { useState } from "react";
-import { getMpn } from "@/util/mpn.lookup";
-
-interface MyComponentProps {
-  testtype: string;
-}
-
-const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
-  const [inputLarge, setInputLarge] = useState(0);
-  const [inputSmall, setInputSmall] = useState(0);
-
-  const handleChangeLarge = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputLarge(Number(event.target.value));
-  };
-
-  const handleChangeSmall = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputSmall(Number(event.target.value));
-  };
-
-  const mpnVal =
-    getMpn(testtype, { large: inputLarge, small: inputSmall }) || [];
-
-  return (
-    <div>
-      <p data-testid="pos-well-title">Positive Wells</p>
-      {testtype === "quanti" && (
-        <input
-          type="numeric"
-          min={0}
-          max={51}
-          value={inputLarge}
-          onChange={handleChangeLarge}
-        />
-      )}
-      {(testtype === "quanti2k" || testtype === "legiolert") && (
-        <div className="flex flex-row space-x-1.5">
-          <div>
-            <p>Large</p>
-            <input
-              type="numeric"
-              min={0}
-              max={testtype === "quanti2k" ? 49 : 6}
-              value={inputLarge}
-              onChange={handleChangeLarge}
-            />
-          </div>
-          <div>
-            <p>Small</p>
-            <input
-              type="numeric"
-              min={0}
-              max={testtype === "quanti2k" ? 48 : 90}
-              value={inputSmall}
-              onChange={handleChangeSmall}
-            />
-          </div>
-        </div>
-      )}
-      {mpnVal.length > 0 && (
-        <>
-          <h1>
-            MPN :{" "}
-            {mpnVal[0] === "<1.0" || mpnVal[0] === ">2419.6"
-              ? mpnVal[0]
-              : mpnVal[0]}
-          </h1>
-          <div>95% Confidence</div>
-          <div className="flex row space-x-1.5">
-            <div>Low: {mpnVal[1]}</div>
-            <div>High: {mpnVal[2] === "infinite" ? "Infinite" : mpnVal[2]}</div>
-          </div>
-        </>
-      )}
-    </div>
-  );
-};
-
-export default LookupComponent;
-/*
- */
