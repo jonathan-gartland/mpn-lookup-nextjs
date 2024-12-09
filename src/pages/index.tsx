@@ -55,11 +55,8 @@ export default function Home() {
     <div
       className={`${geistSans.variable} ${geistMono.variable}  grid grid-rows-[20px_1fr_20px] items-center sm:items-start justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
     >
-      <main className=" w-48 max-w-48 min-w-48 h-[386px] bg-blue-flex flex-col gap-8 row-start-2">
-        <div
-          id="xxx"
-          className="flex flex-col border-2 border-black h-full w-full"
-        >
+      <main className=" w-48 max-w-48 min-w-48 h-[386px] bg-blue-flex flex-col gap-8 row-start-2 border-2 border-black ">
+        <div id="xxx" className="flex flex-col h-full w-full">
           {!(isAbout || isQuantitray || isLegiolert || isQuantitray2k) ? (
             <div id="yyy" className="pt-2 text-xl space-y-4">
               <h1 className="text-2xl text-center pb-2 border-b-2 border-black">
@@ -95,25 +92,27 @@ export default function Home() {
               </button>
             </div>
           ) : (
-            <div className="">
+            <div className="h-[342px]">
               {isQuantitray && (
                 <LookupComponent data-testid="mcqt" testtype={"quanti"} />
               )}
               {isQuantitray2k && <LookupComponent testtype={"quanti2k"} />}
               {isLegiolert && <LookupComponent testtype={"legiolert"} />}
               {isAbout && <About />}
-              {(isAbout || isQuantitray || isLegiolert || isQuantitray2k) && (
-                <button
-                  id="back"
-                  data-testid="back-button"
-                  onClick={resetState}
-                  className={`${isAbout ? "absolute-back-button" : "absolute-back-button"}`}
-                >
-                  {"⬅️   "} Back
-                </button>
-              )}
             </div>
           )}
+          <div>
+            {(isAbout || isQuantitray || isLegiolert || isQuantitray2k) && (
+              <button
+                id="back"
+                data-testid="back-button"
+                onClick={resetState}
+                className={`${isAbout ? "absolute-back-button" : "absolute-back-button"}`}
+              >
+                {"⬅️   "} Back
+              </button>
+            )}
+          </div>
         </div>
       </main>
     </div>

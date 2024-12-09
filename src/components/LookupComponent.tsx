@@ -107,11 +107,18 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
     const mpnVal = getMpn("legio", { large: inputLL, small: inputLS }) || [];
 
     return (
-      <div className="text-center text-lg">
-        <h1 data-testid="legio-header">Legiolert MPN</h1>
-        <p data-testid="pos-well-title">Positive Wells</p>
-        <div className="flex flex-row space-x-1.5">
-          <div>
+      <div className="text-center">
+        <h1
+          className="text-center text-2xl pb-4 pt-4"
+          data-testid="legio-header"
+        >
+          Legiolert MPN
+        </h1>
+        <h3 className="text-center text-xl pb-4" data-testid="pos-well-title">
+          Positive Wells
+        </h3>
+        <div className="flex flex-row space-x-10 pb-6 mx-6">
+          <div className="">
             <p>Large</p>
             <input
               type="numeric"
@@ -132,17 +139,19 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
             />
           </div>
         </div>
-        {testtype === "legiolert" && mpnVal && <h1>MPN : {mpnVal}</h1>}
+        {testtype === "legiolert" && mpnVal && (
+          <h1 className="text-2xl">MPN : {mpnVal}</h1>
+        )}
       </div>
     );
   };
 
   return (
-    <div>
+    <>
       {testtype === "quanti" && QtDiv()}
       {testtype === "quanti2k" && Qt2kDiv()}
       {testtype === "legiolert" && QtLDiv()}
-    </div>
+    </>
   );
 };
 
