@@ -14,22 +14,25 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
     const mpnVal = getMpn("qt", { large: inputQt, small: 0 }) || [];
     return (
       <div>
-        <h1 className="" data-testid="qt-header">
+        <h1 data-testid="qt-header" className="text-center text-xl pb-4 pt-4">
           QuantiTray&reg; MPN
         </h1>
-        <p data-testid="pos-well-title">Positive Wells</p>
+        <h3 data-testid="pos-well-title" className="text-center text-xl pb-4">
+          Positive Wells
+        </h3>
         <input
           type="numeric"
           min={0}
           max={51}
           value={inputQt}
           onChange={handleChangeQt}
+          className="w-1/2 text-2xl px-4 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-blue-5 mx-10 mb-6"
         />
         {testtype === "quanti" && mpnVal.length > 0 && (
           <>
-            <h1>MPN : {mpnVal && mpnVal[0]}</h1>
-            <div>95% Confidence</div>
-            <div className="flex row space-x-1.5">
+            <h1 className="text-xl mx-6 pb-4">MPN : {mpnVal && mpnVal[0]}</h1>
+            <div className="text-lg mx-6 pb-2">95% Confidence</div>
+            <div className="flex row space-x-1.5 mx-1">
               <div>Low: {mpnVal && mpnVal[1]}</div>
               <div>High: {mpnVal && mpnVal[2]}</div>
             </div>
@@ -52,9 +55,13 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
       getMpn("qt2k", { large: inputQt2kL, small: inputQt2kS }) || [];
     return (
       <div>
-        <h1 data-testid="qt2k-header">QuantiTray2000&reg; MPN</h1>
-        <p data-testid="pos-well-title">Positive Wells</p>
-        <div className="flex flex-row space-x-1.5">
+        <h1 data-testid="qt2k-header" className="text-center text-xl pb-4 pt-4">
+          QuantiTray2000&reg; MPN
+        </h1>
+        <h3 data-testid="pos-well-title" className="text-center text-xl pb-4">
+          Positive Wells
+        </h3>
+        <div className="flex flex-row space-x-10 pb-6 mx-6">
           <div>
             <p>Large</p>
             <input
@@ -78,13 +85,11 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
         </div>
         {testtype === "quanti2k" && mpnVal.length > 0 && (
           <>
-            <h1>MPN : {mpnVal && mpnVal[0]}</h1>
-            <div>95% Confidence</div>
-            <div className="flex row space-x-1.5">
-              <div>Low: {mpnVal[1]}</div>
-              <div>
-                High: {mpnVal[2] === "infinite" ? "Infinite" : mpnVal[2]}
-              </div>
+            <h1 className="text-xl mx-6 pb-4">MPN : {mpnVal && mpnVal[0]}</h1>
+            <div className="text-lg mx-6 pb-2">95% Confidence</div>
+            <div className="flex row space-x-1.5 mx-2 text-sm">
+              <div>Low: {mpnVal && mpnVal[1]}</div>
+              <div>High: {mpnVal && mpnVal[2]}</div>
             </div>
           </>
         )}

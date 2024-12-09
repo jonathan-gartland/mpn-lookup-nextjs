@@ -55,7 +55,7 @@ export default function Home() {
     <div
       className={`${geistSans.variable} ${geistMono.variable}  grid grid-rows-[20px_1fr_20px] items-center sm:items-start justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
     >
-      <main className=" w-48 max-w-48 min-w-48 h-[386px] bg-blue-flex flex-col gap-8 row-start-2 border-2 border-black ">
+      <main className=" w-48 max-w-48 min-w-48 h-[386px] bg-blue-flex flex-col gap-8 row-start-2 border-2 border-black rounded-2xl ">
         <div id="xxx" className="flex flex-col h-full w-full">
           {!(isAbout || isQuantitray || isLegiolert || isQuantitray2k) ? (
             <div id="yyy" className="pt-2 text-xl space-y-4">
