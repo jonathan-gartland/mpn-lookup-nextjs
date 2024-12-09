@@ -4,7 +4,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import LookupComponent from "@/components/LookupComponent";
 
 describe("LookupComponent", () => {
-  it("renders QuantiTray input and calculates MPN", () => {
+  it("renders QuantiTray input and looks up MPN", () => {
     render(<LookupComponent testtype="quanti" />);
     const header = screen.getByRole("heading", { name: /MPN : < 1.0/i });
     expect(header).toBeInTheDocument();
@@ -12,20 +12,20 @@ describe("LookupComponent", () => {
   });
 
   it("renders QuantiTray2000 inputs and calculates MPN", () => {
-    render(<LookupComponent testtype="quanti2k" />);
-    const largeInput = screen.getByText(/Large/i);
-    const smallInput = screen.getByText(/Small/i);
-    // fireEvent.change(largeInput, { target: { value: "10" } });
-    // fireEvent.change(smallInput, { target: { value: "5" } });
-    expect(screen.getByText(/QuantiTray2000/i)).toBeInTheDocument();
-  });
+    const { debug } = render(<LookupComponent testtype="quanti2k" />);
+    debug();
+    const largeInput = screen.getByTestId(/qt2k-large/i);
+    const smallInput = screen.getByTestId(/qt2k-small/i);
+    debug(largeInput);
+    debug(smallInput);
 
-  // it("renders Legiolert inputs and calculates MPN", () => {
-  //   render(<LookupComponent testtype="legiolert" />);
-  //   const largeInput = screen.getByLabelText(/Large/i);
-  //   const smallInput = screen.getByLabelText(/Small/i);
-  //   fireEvent.change(largeInput, { target: { value: "3" } });
-  //   fireEvent.change(smallInput, { target: { value: "20" } });
-  //   expect(screen.getByText(/MPN/i)).toBeInTheDocument();
-  // });
+    fireEvent.change(largeInput, { target: { value: "10" } });
+    fireEvent.change(smallInput, { target: { value: "5" } });
+
+    debug();
+
+    expect(screen.getByText(/QuantiTray2000/i)).toBeInTheDocument();
+    expect(largeInput).toHaveValue("10");
+    expect(smallInput).toHaveValue("5");
+  });
 });

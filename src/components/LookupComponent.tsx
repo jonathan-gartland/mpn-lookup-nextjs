@@ -4,7 +4,21 @@ import { getMpn } from "@/util/mpn.lookup";
 interface MyComponentProps {
   testtype: string;
 }
-
+interface HeadingProps {
+  title: string;
+}
+const QtHeading: React.FC<HeadingProps> = ({ title }) => {
+  return (
+    <>
+      <h1 data-testid="qt2k-header" className="text-center text-xl pb-4 pt-4">
+        {title}
+      </h1>
+      <h3 data-testid="pos-well-title" className="text-center text-xl pb-4">
+        Positive Wells
+      </h3>
+    </>
+  );
+};
 const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
   const QtDiv = () => {
     const [inputQt, setInputQt] = useState(0);
@@ -14,13 +28,10 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
     const mpnVal = getMpn("qt", { large: inputQt, small: 0 }) || [];
     return (
       <div>
-        <h1 data-testid="qt-header" className="text-center text-xl pb-4 pt-4">
-          QuantiTray&reg; MPN
-        </h1>
-        <h3 data-testid="pos-well-title" className="text-center text-xl pb-4">
-          Positive Wells
-        </h3>
+        <QtHeading title="QuantiTray&reg; MPN" />
         <input
+          id={"qt"}
+          data-testid="qt"
           type="numeric"
           min={0}
           max={51}
@@ -55,16 +66,13 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
       getMpn("qt2k", { large: inputQt2kL, small: inputQt2kS }) || [];
     return (
       <div>
-        <h1 data-testid="qt2k-header" className="text-center text-xl pb-4 pt-4">
-          QuantiTray2000&reg; MPN
-        </h1>
-        <h3 data-testid="pos-well-title" className="text-center text-xl pb-4">
-          Positive Wells
-        </h3>
+        <QtHeading title="QuantiTray2000&reg; MPN" />
         <div className="flex flex-row space-x-10 pb-6 mx-6">
           <div>
             <p>Large</p>
             <input
+              id={"qt2k-large"}
+              data-testid="qt2k-large"
               type="numeric"
               min={0}
               max={49}
@@ -75,6 +83,8 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
           <div>
             <p>Small</p>
             <input
+              id={"qt2k-small"}
+              data-testid="qt2k-small"
               type="numeric"
               min={0}
               max={49}
@@ -113,19 +123,13 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
 
     return (
       <div className="text-center">
-        <h1
-          className="text-center text-2xl pb-4 pt-4"
-          data-testid="legio-header"
-        >
-          Legiolert MPN
-        </h1>
-        <h3 className="text-center text-xl pb-4" data-testid="pos-well-title">
-          Positive Wells
-        </h3>
+        <QtHeading title="Legiolert MPN" />
         <div className="flex flex-row space-x-10 pb-6 mx-6">
           <div className="">
             <p>Large</p>
             <input
+              id={"legio-large"}
+              data-testid="legio-large"
               type="numeric"
               min={0}
               max={6}
@@ -136,6 +140,8 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
           <div>
             <p>Small</p>
             <input
+              id={"legio-small"}
+              data-testid="legio-small"
               type="numeric"
               min={0}
               max={90}

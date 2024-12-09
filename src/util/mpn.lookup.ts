@@ -1,5 +1,4 @@
-type Mpn = Array<(string | number) | number | (string | number)> | undefined;
-
+type Mpn = [string | number, number, string | number] | undefined;
 const mpn: Mpn[] = [
   ["< 1.0", 0, 3.7],
   [1, 0.3, 5.6],
@@ -3169,7 +3168,6 @@ export const getMpn = (
   testType: string,
   inCount: { large: number; small: number }
 ) => {
-  console.log(testType);
   return testType === "qt"
     ? getQtMpn(inCount.large)
     : testType === "qt2k"
