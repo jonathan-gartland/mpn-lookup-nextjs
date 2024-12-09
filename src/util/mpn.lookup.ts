@@ -3169,6 +3169,7 @@ export const getMpn = (
   testType: string,
   inCount: { large: number; small: number }
 ) => {
+  console.log(testType);
   return testType === "qt"
     ? getQtMpn(inCount.large)
     : testType === "qt2k"
