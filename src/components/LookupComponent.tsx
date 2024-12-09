@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { getMpn } from "@/util/mpn.lookup";
 
 interface MyComponentProps {
-  testtype: string; // quanti, quanti2k, legiolert
+  testtype: string;
 }
 
 const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
@@ -139,13 +139,9 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
 
   return (
     <div>
-      {testtype === "quanti" ? (
-        <div>{QtDiv()}</div>
-      ) : testtype === "quanti2k" ? (
-        <div>{Qt2kDiv()}</div>
-      ) : testtype === "legiolert" ? (
-        <div>{QtLDiv()}</div>
-      ) : undefined}
+      {testtype === "quanti" && QtDiv()}
+      {testtype === "quanti2k" && Qt2kDiv()}
+      {testtype === "legiolert" && QtLDiv()}
     </div>
   );
 };

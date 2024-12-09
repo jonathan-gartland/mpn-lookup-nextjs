@@ -18,7 +18,7 @@ const About = () => {
   return (
     <div className=" mx-1 pt-1 text-sm flex flex-col gap-8 row-start-2 items-center sm:items-start">
       <div className="instructions">
-        <h1 className="text-center text-lg bg-blue-400 border-b-2 border-black">
+        <h1 className="text-center text-lg border-b-2 border-black">
           How to use the App
         </h1>
         <p>Click on the test you need to perform to get started.</p>
@@ -103,16 +103,14 @@ export default function Home() {
               {isLegiolert && <LookupComponent testtype={"legiolert"} />}
               {isAbout && <About />}
               {(isAbout || isQuantitray || isLegiolert || isQuantitray2k) && (
-                <div className="flex w-full items-center justify-center text-center border-t-2 border-black bg-blue-300">
-                  <button
-                    id="back"
-                    data-testid="back-button"
-                    onClick={resetState}
-                    // className="flex w-full items-center justify-center text-center border-t-2 border-black bg-blue-300"
-                  >
-                    {"⬅️   "} Back
-                  </button>
-                </div>
+                <button
+                  id="back"
+                  data-testid="back-button"
+                  onClick={resetState}
+                  className={`${isAbout ? "absolute-back-button" : "absolute-back-button"}`}
+                >
+                  {"⬅️   "} Back
+                </button>
               )}
             </div>
           )}
