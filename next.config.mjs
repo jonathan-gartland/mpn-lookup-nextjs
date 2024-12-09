@@ -1,12 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",
+  //output: "export",
   /**
    * Set base path. This is the slug of your GitHub repository.
    *
    * @see https://nextjs.org/docs/app/api-reference/next-config-js/basePath
    */
-  basePath: "/mpn-lookup-nextjs",
+  // basePath: "/mpn-lookup-nextjs",
   /**
    * Disable server-based image optimization. Next.js does not support
    * dynamic features with static exports.
