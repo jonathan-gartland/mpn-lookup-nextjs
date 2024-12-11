@@ -9,7 +9,7 @@
     "build:tsc": "pnpm dlx tsc && rollup -c",
     "start": "next start",
     "lint": "next lint",
-    "check-types": "tsc --pretty --noEmit",
+    "check-types": "npx tsc --pretty --noEmit",
     "check-format": "prettier --check .",
     "check-lint": "eslint . --ext ts --ext tsx --ext js",
     "lint-staged": "lint-staged",
@@ -68,7 +68,6 @@
     "tailwindcss": "^3.4.16",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
-    "tsc": "^2.0.4",
     "typescript": "^5.7.2"
   }
 }
