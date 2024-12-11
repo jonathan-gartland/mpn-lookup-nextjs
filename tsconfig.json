@@ -2,11 +2,7 @@
   "compilerOptions": {
     "declaration": true,
     "outDir": "./dist",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -25,9 +21,7 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     },
     "target": "ES2017"
   },
@@ -37,10 +31,14 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "commitlint.config.ts",
-    "./src/components/**/*",
+    "./src/components/**/*"
   ],
-  "exclude": [
-    "node_modules", "jest.config.ts"
-  ],
-  "types": ["@types/node", "@types/react", "@types/react-dom", "@types/jest", "@testing-library/jest-dom"]
+  "exclude": ["node_modules", "jest.config.ts"],
+  "types": [
+    "@types/node",
+    "@types/react",
+    "@types/react-dom",
+    "@types/jest",
+    "@testing-library/jest-dom"
+  ]
 }
