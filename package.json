@@ -19,6 +19,15 @@
     "prepare": "husky",
     "test": "jest"
   },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "eslint --max-warnings=0",
+      "prettier --write"
+    ],
+    "**/*.{html,json,css,scss,md,mdx}": [
+      "prettier -w"
+    ]
+  },
   "dependencies": {
     "add": "^2.0.6",
     "next": "15.0.3",
@@ -51,7 +60,7 @@
     "husky": "^8.0.3",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "lint-staged": "^15.2.10",
+    "lint-staged": "^15.2.11",
     "postcss": "^8.4.49",
     "prettier": "3.2.5",
     "rollup": "^4.28.1",
