@@ -27,6 +27,5 @@ describe("LookupComponent", () => {
     expect(screen.getByText(/QuantiTray2000/i)).toBeInTheDocument();
     expect(largeInput).toHaveValue("10");
     expect(smallInput).toHaveValue("5");
-    expect(1).toBe(2-1);
   });
 });
