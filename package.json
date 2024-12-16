@@ -16,9 +16,9 @@
     "format": "prettier --check .",
     "format:fix": "prettier --write --list-different .",
     "test-all": "npm run check-format && npm run check-lint && npm run check-types && npm run build",
-    "prepare": "husky",
+    "prepare": "husky && husky install",
     "test": "jest",
-    "test:e2e": "npx playwright test -- --spec tests/**/*.spec.ts"
+    "test:e2e": "npx playwright test -- --spec tests/*.spec.ts"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
@@ -27,7 +27,9 @@
     ],
     "**/*.{html,json,css,scss,md,mdx}": [
       "prettier -w"
-    ]
+    ],
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,md}": "prettier --write"
   },
   "dependencies": {
     "add": "^2.0.6",
@@ -59,7 +61,7 @@
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.6.0",
     "eslint-plugin-react": "^7.37.2",
-    "husky": "^8.0.3",
+    "husky": "^9.1.7",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "lint-staged": "^15.2.11",
