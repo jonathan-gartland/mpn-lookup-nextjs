@@ -26,3 +26,4 @@ echo ">> Linting your files and fixing them if needed..."
 pnpm check-types
 pnpm dlx lint-staged
 pnpm test
+pnpm test:e2e
