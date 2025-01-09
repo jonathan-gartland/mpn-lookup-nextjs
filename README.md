@@ -42,8 +42,4 @@ That's it.
 #### I agree, feel free to fork and style it up.  
 
 ![Playwright Tests](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/playwright/badge.svg)  
-  
 
-[//]: # (<a href=”https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions"><img src=”https://github.)
-
-[//]: # (com/jonathan-gartland/mpn-lookup-nextjs /workflows/Playwright-Tests/badge.svg" alt=”Build Status”></a>)
