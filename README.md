@@ -41,4 +41,5 @@ That's it.
 
 #### I agree, feel free to fork and style it up.  
 
-![example workflow](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/playwright.yml/badge.svg)
+![Playwright Tests](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/playwright/badge.svg)  
+
