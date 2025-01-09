@@ -39,4 +39,6 @@ That's it.
 
 #### You may be thinking, this is very sparse - not much more than a wireframe.
 
-#### I agree, feel free to fork and style it up.
+#### I agree, feel free to fork and style it up.  
+
+![example workflow](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/playwright.yml/badge.svg)
