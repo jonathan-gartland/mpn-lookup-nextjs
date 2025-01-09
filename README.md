@@ -39,4 +39,7 @@ That's it.
 
 #### You may be thinking, this is very sparse - not much more than a wireframe.
 
-#### I agree, feel free to fork and style it up.
+#### I agree, feel free to fork and style it up.  
+
+<a href=”https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions"><img src=”https://github.
+com/jonathan-gartland/mpn-lookup-nextjs /workflows/Playwright-Tests/badge.svg" alt=”Build Status”></a>
