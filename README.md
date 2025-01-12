@@ -1,3 +1,5 @@
+[![Playwright Tests](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/playwright.yml/badge.svg?branch=development)](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/playwright.yml)  
+
 # MPN Lookup Demo
 
 ![TS](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
@@ -40,12 +42,10 @@ That's it.
 #### You may be thinking, this is very sparse - not much more than a wireframe.
 
 #### I agree, feel free to fork and style it up.  
+  
 
-[![Playwright Tests](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/playwright.yml/badge.svg?branch=development)](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/playwright.yml)  
-<div align="center">
-    	<a href="https://raw.githubusercontent.com/jonathan-gartland/mpn-lookup-nextjs/main/LICENSE" rel="nofollow">
-</div>
+# License
 
-<br/>
+This application is released under the [MIT license](LICENSE). You can use the code for any purpose, including commercial projects.
 
-
+[![license](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
