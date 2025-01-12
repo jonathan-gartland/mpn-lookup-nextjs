@@ -2,7 +2,7 @@
 [![Node.js CI](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/test.yml/badge.svg)](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/test.yml)  
 
 # MPN Lookup Demo  
-<h1 style="font-size: 50px">Your Text Here</h1>  
+<h1 style="font-size: 60px">Your Text Here</h1>  
 
 ![TS](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![Node](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
