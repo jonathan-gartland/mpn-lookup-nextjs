@@ -41,5 +41,11 @@ That's it.
 
 #### I agree, feel free to fork and style it up.  
 
-[![Playwright Tests](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/playwright.yml/badge.svg?branch=development)](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/playwright.yml)
+[![Playwright Tests](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/playwright.yml/badge.svg?branch=development)](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/playwright.yml)  
+<div align="center">
+    	<a href="https://raw.githubusercontent.com/jonathan-gartland/mpn-lookup-nextjs/main/LICENSE" rel="nofollow">
+</div>
+
+<br/>
+
 
