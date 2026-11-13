@@ -46,7 +46,7 @@
     "@commitlint/types": "^19.5.0",
     "@playwright/test": "^1.65.0",
     "@testing-library/dom": "^10.4.2",
-    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^15.0.7",
     "@types/jest": "^29.5.14",
     "@types/node": "^20.17.9",
