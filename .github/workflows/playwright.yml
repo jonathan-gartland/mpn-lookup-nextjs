@@ -4,6 +4,8 @@ on:
     branches: [ main, development ]
   pull_request:
     branches: [ main, development ]
+  # Lets the deps agent re-run CI after pushing a fix (pushes with GITHUB_TOKEN don't trigger runs)
+  workflow_dispatch:
 jobs:
   test:
     timeout-minutes: 60
