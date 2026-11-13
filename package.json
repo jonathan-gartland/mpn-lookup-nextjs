@@ -3,22 +3,23 @@
   "version": "1.0.0",
   "main": "index.js",
   "types": "index.d.ts",
+  "packageManager": "pnpm@9.15.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:tsc": "pnpm dlx tsc && rollup -c",
+    "build:tsc": "tsc && rollup -c",
     "start": "next start",
     "lint": "next lint",
-    "check-types": "npx tsc --pretty --noEmit",
+    "check-types": "tsc --pretty --noEmit",
     "check-format": "prettier --check .",
     "check-lint": "eslint . --ext ts --ext tsx --ext js",
     "lint-staged": "lint-staged",
     "format": "prettier --check .",
     "format:fix": "prettier --write --list-different .",
-    "test-all": "npm run check-format && npm run check-lint && npm run check-types && npm run build",
+    "test-all": "pnpm check-format && pnpm check-lint && pnpm check-types && pnpm build",
     "prepare": "husky && husky install",
     "test": "jest",
-    "test:e2e": "npx playwright test -- --spec e2e/*.spec.ts"
+    "test:e2e": "playwright test -- --spec e2e/*.spec.ts"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
