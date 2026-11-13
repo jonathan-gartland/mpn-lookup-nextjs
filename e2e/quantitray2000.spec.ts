@@ -11,7 +11,9 @@ test.describe("QuantiTray2000", () => {
     await expect(page.getByTestId("qt2k-large")).toHaveValue("0");
     await expect(page.getByTestId("qt2k-small")).toHaveValue("0");
     const v = getMpn("qt2k", { large: 0, small: 0 })!;
-    await expect(page.getByText(`MPN : ${v[0]}`)).toBeVisible();
+    await expect(
+      page.getByText(`MPN : ${v[0]}`, { exact: true })
+    ).toBeVisible();
   });
 
   for (const [large, small] of [
@@ -28,10 +30,16 @@ test.describe("QuantiTray2000", () => {
       const v = getMpn("qt2k", { large, small })!;
       await page.getByTestId("qt2k-large").fill(String(large));
       await page.getByTestId("qt2k-small").fill(String(small));
-      await expect(page.getByText(`MPN : ${v[0]}`)).toBeVisible();
+      await expect(
+        page.getByText(`MPN : ${v[0]}`, { exact: true })
+      ).toBeVisible();
       await expect(page.getByText("95% Confidence")).toBeVisible();
-      await expect(page.getByText(`Low: ${v[1]}`)).toBeVisible();
-      await expect(page.getByText(`High: ${v[2]}`)).toBeVisible();
+      await expect(
+        page.getByText(`Low: ${v[1]}`, { exact: true })
+      ).toBeVisible();
+      await expect(
+        page.getByText(`High: ${v[2]}`, { exact: true })
+      ).toBeVisible();
     });
   }
 

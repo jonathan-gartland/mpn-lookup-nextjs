@@ -10,7 +10,9 @@ test.describe("QuantiTray", () => {
   test("initial state shows the 0 count result", async ({ page }) => {
     await expect(page.getByTestId("qt")).toHaveValue("0");
     const v = getMpn("qt", { large: 0, small: 0 })!;
-    await expect(page.getByText(`MPN : ${v[0]}`)).toBeVisible();
+    await expect(
+      page.getByText(`MPN : ${v[0]}`, { exact: true })
+    ).toBeVisible();
   });
 
   for (const count of [0, 1, 25, 50, 51]) {
@@ -19,10 +21,16 @@ test.describe("QuantiTray", () => {
     }) => {
       const v = getMpn("qt", { large: count, small: 0 })!;
       await page.getByTestId("qt").fill(String(count));
-      await expect(page.getByText(`MPN : ${v[0]}`)).toBeVisible();
+      await expect(
+        page.getByText(`MPN : ${v[0]}`, { exact: true })
+      ).toBeVisible();
       await expect(page.getByText("95% Confidence")).toBeVisible();
-      await expect(page.getByText(`Low: ${v[1]}`)).toBeVisible();
-      await expect(page.getByText(`High: ${v[2]}`)).toBeVisible();
+      await expect(
+        page.getByText(`Low: ${v[1]}`, { exact: true })
+      ).toBeVisible();
+      await expect(
+        page.getByText(`High: ${v[2]}`, { exact: true })
+      ).toBeVisible();
     });
   }
 
