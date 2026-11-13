@@ -24,6 +24,7 @@ You make a dependency update pass CI. Read `CLAUDE.md` first.
 2. Reproduce the failure with the checks CI runs:
    - `pnpm check-types`
    - `pnpm check-lint`
+   - `echo "ci(ci): smoke test" | pnpm exec commitlint` (must pass; an invalid message must fail)
    - `pnpm test`
    - `pnpm build`
    - `pnpm exec playwright test --project=chromium`

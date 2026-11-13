@@ -33,3 +33,30 @@ jobs:
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
     - run: pnpm test
+
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v7
+    - name: Install pnpm
+      uses: pnpm/action-setup@v6
+    - name: Use Node.js
+      uses: actions/setup-node@v7
+      with:
+        node-version: '22.x'
+        cache: pnpm
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+    - name: Typecheck
+      run: pnpm check-types
+    - name: Lint
+      run: pnpm check-lint
+    # The commit-msg hook only runs locally; make sure commitlint still accepts valid
+    # messages and rejects invalid ones after dependency updates.
+    - name: Commitlint smoke test
+      run: |
+        echo "ci(ci): smoke test" | pnpm exec commitlint
+        if echo "not a conventional commit" | pnpm exec commitlint; then
+          echo "::error::commitlint accepted an invalid message"
+          exit 1
+        fi
