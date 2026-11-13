@@ -1,0 +1,99 @@
+# Runs the e2e-tester agent (.claude/agents/e2e-tester.md) and opens a PR with its changes.
+# The agent can only edit e2e/; the guard step below enforces that independently of the agent.
+name: E2E Test Agent
+
+on:
+  workflow_dispatch:
+    inputs:
+      task:
+        description: "Extra instructions for the agent (optional)"
+        required: false
+        default: ""
+
+concurrency:
+  group: e2e-agent
+  cancel-in-progress: false
+
+jobs:
+  agent:
+    timeout-minutes: 45
+    # Playwright 1.49 browser deps target Ubuntu 24.04; ubuntu-latest (26.04) lacks them
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run e2e-tester agent
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            You are the e2e-tester agent. Follow .claude/agents/e2e-tester.md exactly.
+            Review the current app and the tests in e2e/, then add or update tests so the app is covered.
+            ${{ inputs.task }}
+          claude_args: |
+            --model claude-sonnet-5-5
+            --max-turns 40
+            --permission-mode default
+            --allowedTools "Read,Glob,Grep,Edit(e2e/**),Write(e2e/**),Bash(pnpm exec playwright test:*)"
+
+      - name: Check agent only changed e2e/
+        id: guard
+        run: |
+          changed=$(git status --porcelain --untracked-files=all | cut -c4-)
+          if [ -z "$changed" ]; then
+            echo "No changes from the agent."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          outside=$(echo "$changed" | grep -v '^e2e/' || true)
+          if [ -n "$outside" ]; then
+            echo "::error::Agent changed files outside e2e/:"
+            echo "$outside"
+            exit 1
+          fi
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Verify e2e tests pass
+        if: steps.guard.outputs.changed == 'true'
+        run: pnpm exec playwright test --project=chromium
+
+      - name: Open pull request
+        if: steps.guard.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          branch="claude/e2e-tests-${{ github.run_id }}"
+          summary=e2e/.agent-summary.md
+          body=$(cat "$summary" 2>/dev/null || echo "Automated e2e test update.")
+          rm -f "$summary"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add e2e/
+          git commit -m "test(test): update e2e tests (e2e-tester agent)"
+          git push -u origin "$branch"
+          gh pr create --base "${{ github.ref_name }}" --head "$branch" \
+            --title "test(test): update e2e tests (e2e-tester agent)" \
+            --body "$body
+
+          ---
+          Opened by the [E2E Test Agent workflow](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
