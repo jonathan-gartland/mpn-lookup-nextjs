@@ -22,6 +22,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      actions: write
       id-token: write
     steps:
       - uses: actions/checkout@v7
@@ -85,12 +86,18 @@ jobs:
           body=$(cat "$summary" 2>/dev/null || echo "Automated e2e test update.")
           rm -f "$summary"
 
+          # claude-code-action points git at its app token and revokes it when done; push with the job token
+          git config --local --unset-all http.https://github.com/.extraheader || true
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git switch -c "$branch"
           git add e2e/
           git commit -m "test(test): update e2e tests (e2e-tester agent)"
           git push -u origin "$branch"
+          # PRs opened with the job token don't trigger CI; start the required checks directly
+          gh workflow run test.yml --ref "$branch"
+          gh workflow run playwright.yml --ref "$branch"
           gh pr create --base "${{ github.ref_name }}" --head "$branch" \
             --title "test(test): update e2e tests (e2e-tester agent)" \
             --body "$body
