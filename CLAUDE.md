@@ -7,6 +7,7 @@ static export under the base path `/mpn-lookup-nextjs`.
 ## Commands
 
 Use pnpm only (pinned in `package.json` `packageManager`). Never add a yarn or npm lockfile.
+Node 24 (`.nvmrc`; CI pins `24.x`).
 
 - `pnpm dev` — dev server at http://localhost:3000/mpn-lookup-nextjs
 - `pnpm test` — Jest unit tests (`__tests__/`)
