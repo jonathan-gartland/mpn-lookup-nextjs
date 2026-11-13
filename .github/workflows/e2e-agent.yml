@@ -17,8 +17,7 @@ concurrency:
 jobs:
   agent:
     timeout-minutes: 45
-    # Playwright 1.49 browser deps target Ubuntu 24.04; ubuntu-latest (26.04) lacks them
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
@@ -31,7 +30,7 @@ jobs:
 
       - uses: actions/setup-node@v7
         with:
-          node-version: 22.x
+          node-version: 24.x
           cache: pnpm
 
       - name: Install dependencies
