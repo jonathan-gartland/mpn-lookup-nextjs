@@ -20,7 +20,7 @@
     "format": "prettier --check .",
     "format:fix": "prettier --write --list-different .",
     "test-all": "pnpm check-format && pnpm check-lint && pnpm check-types && pnpm build",
-    "prepare": "husky && husky install",
+    "prepare": "husky",
     "test": "jest",
     "test:e2e": "playwright test -- --spec e2e/*.spec.ts"
   },
