@@ -22,3 +22,12 @@ The lookup tables in `src/util/mpn.lookup.ts` are transcribed from the IDEXX PDF
 and must never change. Do not edit, reorder, reformat or "correct" any table value.
 Code around the data (lookup functions, types) may change; the values may not.
 If something looks wrong in the data, report it — don't fix it.
+
+## Agents
+
+- `.github/workflows/claude.yml` — mention `@claude` in an issue or PR (repo owner only).
+- `.github/workflows/e2e-agent.yml` — writes e2e tests (`.claude/agents/e2e-tester.md`).
+- `.github/workflows/deps-agent.yml` — fixes failing Dependabot PRs
+  (`.claude/agents/dependency-updater.md`).
+
+Agents never edit `.github/` or `src/util/mpn.lookup.ts`.
