@@ -119,7 +119,7 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
       setInputLS(Number(event.target.value));
     };
 
-    const mpnVal = getMpn("legio", { large: inputLL, small: inputLS }) || [];
+    const mpnVal = getMpn("legio", { large: inputLL, small: inputLS });
 
     return (
       <div className="text-center">
@@ -150,7 +150,7 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
             />
           </div>
         </div>
-        {testtype === "legiolert" && mpnVal && (
+        {testtype === "legiolert" && mpnVal !== undefined && (
           <h1 className="text-2xl">MPN : {mpnVal}</h1>
         )}
       </div>
