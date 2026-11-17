@@ -6,9 +6,9 @@ import LookupComponent from "@/components/LookupComponent";
 describe("LookupComponent", () => {
   it("renders QuantiTray input and looks up MPN", () => {
     render(<LookupComponent testtype="quanti" />);
-    const header = screen.getByRole("heading", { name: /MPN : < 1.0/i });
+    const header = screen.getByRole("heading", { name: /MPN : <1.0/i });
     expect(header).toBeInTheDocument();
-    expect(header).toHaveTextContent("MPN : < 1");
+    expect(header).toHaveTextContent("MPN : <1.0");
   });
 
   it("renders QuantiTray2000 inputs and calculates MPN", () => {

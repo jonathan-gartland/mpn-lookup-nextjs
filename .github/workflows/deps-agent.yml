@@ -68,7 +68,7 @@ jobs:
             --max-turns 60
             --permission-mode default
             --allowedTools "Read,Glob,Grep,Edit,Write,Bash(pnpm check-types),Bash(pnpm check-lint),Bash(pnpm test:*),Bash(pnpm build),Bash(pnpm exec playwright test:*),Bash(pnpm install --ignore-scripts:*),Bash(pnpm exec commitlint:*),Bash(git log:*),Bash(git diff:*),Bash(git show:*)"
-            --disallowedTools "Edit(src/util/mpn.lookup.ts),Write(src/util/mpn.lookup.ts),Edit(.github/**),Write(.github/**)"
+            --disallowedTools "Edit(__tests__/mpnlookup/table-checksum.test.ts),Write(__tests__/mpnlookup/table-checksum.test.ts),Edit(.github/**),Write(.github/**)"
 
       - name: Check protected files are unchanged
         id: guard
@@ -78,7 +78,7 @@ jobs:
             echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          protected=$(echo "$changed" | grep -E '^(\.github/|src/util/mpn\.lookup\.ts$)' || true)
+          protected=$(echo "$changed" | grep -E '^(\.github/|__tests__/mpnlookup/table-checksum\.test\.ts$)' || true)
           if [ -n "$protected" ]; then
             echo "::error::Agent changed protected files:"
             echo "$protected"

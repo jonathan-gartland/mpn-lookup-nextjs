@@ -10,8 +10,9 @@ You make a dependency update pass CI. Read `CLAUDE.md` first.
 
 - You are on a branch that bumps one or more dependencies. Make the smallest changes that get the
   project working on the new versions: API migrations, config format changes, type fixes, updated tests.
-- Never edit `src/util/mpn.lookup.ts` table values or anything under `.github/`. A separate check fails
-  the run if those change.
+- Never edit `__tests__/mpnlookup/table-checksum.test.ts` or anything under `.github/`. A separate
+  check fails the run if those change. If an `mpn-lookup` update fails the checksum test, the table
+  data changed: stop and report it, don't work around it.
 - Don't downgrade or pin back the updated packages to make things pass, and don't add new
   dependencies unless the upgrade requires one (e.g. a package split in two).
 - Don't delete or skip tests to make them pass. If a test's expectation genuinely changed with the
