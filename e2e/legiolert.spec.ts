@@ -37,12 +37,12 @@ test.describe("Legiolert", () => {
     });
   }
 
-  test("out-of-range counts show an empty MPN", async ({ page }) => {
-    const empty = page.getByRole("heading", { name: /^MPN :\s*$/ });
+  test("out-of-range counts hide the MPN heading", async ({ page }) => {
+    const heading = page.getByRole("heading", { name: /^MPN :/ });
     await page.getByTestId("legio-large").fill("7");
-    await expect(empty).toBeVisible();
+    await expect(heading).toHaveCount(0);
     await page.getByTestId("legio-large").fill("0");
     await page.getByTestId("legio-small").fill("91");
-    await expect(empty).toBeVisible();
+    await expect(heading).toHaveCount(0);
   });
 });
