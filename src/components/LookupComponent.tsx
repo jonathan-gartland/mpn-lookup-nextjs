@@ -87,7 +87,7 @@ const LookupComponent: React.FC<MyComponentProps> = ({ testtype }) => {
               data-testid="qt2k-small"
               type="numeric"
               min={0}
-              max={49}
+              max={48}
               value={inputQt2kS}
               onChange={handleChangeQt2kS}
             />
