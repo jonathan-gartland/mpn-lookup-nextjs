@@ -14,7 +14,14 @@ Node 24 (`.nvmrc`; CI pins `24.x`).
 - `pnpm exec playwright test` — e2e tests (`e2e/`); starts the dev server itself
 - `pnpm check-types`, `pnpm check-lint`, `pnpm check-format`
 
-Commits must follow `commitlint.config.ts` (conventional commits with a restricted scope list).
+Commits must follow `commitlint.config.ts`: `type(scope): subject`. Other scopes are rejected,
+so pick the closest one from this list (e.g. `fix(bug): …`, not `fix(component): …`).
+
+- Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
+- Scopes: `setup`, `config`, `deps`, `feature`, `bug`, `docs`, `style`, `refactor`, `test`,
+  `build`, `ci`, `release`, `other`
+
+Check a message with `echo "fix(bug): …" | pnpm exec commitlint`.
 
 ## MPN table data is constant
 
