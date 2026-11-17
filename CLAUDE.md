@@ -18,10 +18,14 @@ Commits must follow `commitlint.config.ts` (conventional commits with a restrict
 
 ## MPN table data is constant
 
-The lookup tables in `src/util/mpn.lookup.ts` are transcribed from the IDEXX PDFs
-and must never change. Do not edit, reorder, reformat or "correct" any table value.
-Code around the data (lookup functions, types) may change; the values may not.
-If something looks wrong in the data, report it — don't fix it.
+The lookup tables come from the `mpn-lookup` npm package (transcribed from the IDEXX PDFs)
+and must never change. `src/util/mpn.lookup.ts` only wraps the package's lookups as `getMpn`.
+
+- Don't copy, override or post-process table values in the app; show what `mpn-lookup` returns.
+- `__tests__/mpnlookup/table-checksum.test.ts` hashes every lookup result through `getMpn` and
+  fails if any value changes (e.g. from an `mpn-lookup` update). Never edit it or its hash;
+  CI's `verify` job fails any PR that touches it.
+- If something looks wrong in the data, report it — don't fix it.
 
 ## Agents
 
@@ -30,4 +34,4 @@ If something looks wrong in the data, report it — don't fix it.
 - `.github/workflows/deps-agent.yml` — fixes failing Dependabot PRs
   (`.claude/agents/dependency-updater.md`).
 
-Agents never edit `.github/` or `src/util/mpn.lookup.ts`.
+Agents never edit `.github/` or `__tests__/mpnlookup/table-checksum.test.ts`.

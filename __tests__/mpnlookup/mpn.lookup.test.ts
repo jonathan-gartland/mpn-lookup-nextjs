@@ -5,9 +5,9 @@ describe("getMpn", () => {
     let result = getMpn("qt", { large: 10, small: 0 });
     expect(result).toEqual([11.1, 6.1, 20.5]);
     result = getMpn("qt", { large: 0, small: 0 });
-    expect(result).toEqual(["< 1.0", 0, 3.7]);
+    expect(result).toEqual(["<1.0", 0, 3.7]);
     result = getMpn("qt", { large: 51, small: 0 });
-    expect(result).toEqual(["> 200.5", 146.1, "Infinite"]);
+    expect(result).toEqual([">200.5", 146.1, "infinite"]);
   });
 
   it("returns correct MPN for QuantiTray2000", () => {
