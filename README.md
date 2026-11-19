@@ -1,51 +1,72 @@
-[![Playwright Tests](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/playwright.yml/badge.svg?branch=development)](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/playwright.yml)
-[![Cypress Tests](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/cypress-tests.yml/badge.svg)](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/cypress-tests.yml)
-[![Node.js CI](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/test.yml/badge.svg)](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/test.yml) [![Deploy](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/deploy.yml/badge.svg)](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/deploy.yml)
+# MPN Lookup
 
-# MPN Lookup Demo
+[![Unit Tests](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/test.yml/badge.svg)](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/test.yml)
+[![Playwright Tests](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/playwright.yml/badge.svg)](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/playwright.yml)
+[![Deploy](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/deploy.yml/badge.svg)](https://github.com/jonathan-gartland/mpn-lookup-nextjs/actions/workflows/deploy.yml)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
-![TS](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![NextJS](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![ESLint](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white)
-![Jest](https://img.shields.io/badge/Jest-323330?style=for-the-badge&logo=Jest&logoColor=white)
-![Prettier](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E)
-![Intellij](https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)
+A small web app for Most Probable Number (MPN) lookups on IDEXX Quanti-Tray®, Quanti-Tray®/2000
+and Legiolert® water tests. Choose a test, enter the positive well counts, and it shows the MPN
+with its 95% confidence interval.
 
-## This is a test project to learn and practice Next.js and Tailwind CSS.
+**[Live demo →](https://jonathan-gartland.github.io/mpn-lookup-nextjs/)**
 
-## It is a component that uses the [Mpn Lookup npm library](https://www.npmjs.com/package/mpn-lookup) which is simply a javascript object that contains the information in the PDF files located [here](https://www.idexx.com/files/qt97mpntable.pdf), [here](https://www.idexx.com/files/51-well-quanti-tray-mpn-table-h-en.pdf), and [here](https://www.idexx.com/files/quanti-tray-legiolert-mpn-table.pdf).
+<p>
+  <img src="./public/home.jpg" alt="Home screen with QuantiTray, QuantiTray2000, Legiolert and About buttons" width="240">
+  &nbsp;&nbsp;
+  <img src="./public/qt.jpg" alt="QuantiTray screen: 51 positive wells gives MPN >200.5, 95% CI 146.1 to infinite" width="240">
+</p>
 
-### Try it out:
+The lookups come from [`mpn-lookup`](https://www.npmjs.com/package/mpn-lookup), my TypeScript
+library of the IDEXX MPN tables. The app shows exactly what the library returns.
 
-#### 1. git clone https://github.com/jonathan-gartland/mpn-lookup-nextjs.git
+## Tech
 
-#### 2. cd mpn-lookup-nextjs
+- [Next.js](https://nextjs.org/) 15 (pages router), React 18, TypeScript, Tailwind CSS
+- Static export (`output: "export"`) deployed to GitHub Pages under `/mpn-lookup-nextjs`
+- Jest and React Testing Library for component tests, Playwright for end-to-end tests
 
-#### 3. pnpm install
+## Testing
 
-#### 4. pnpm run dev
+I built this app to practice testing a React app at every layer:
 
-#### the app should be running at http://localhost:3000
+| Layer          | Tool                         | What it covers                                                                                      |
+| -------------- | ---------------------------- | --------------------------------------------------------------------------------------------------- |
+| Component      | Jest + React Testing Library | Home view navigation; `LookupComponent` input and results for each test type                        |
+| End-to-end     | Playwright                   | Menu flows, each calculator screen, About, and page metadata (favicon, title, link preview tags)    |
+| Data integrity | Jest                         | A checksum over every lookup the app displays, so a dependency update that changes a value fails CI |
 
-#### You should be seeing this view:
+The e2e suite runs in Chromium, Firefox and WebKit on pushes and pull requests to `main`.
 
-![home view](./public/home.jpg "Home View")
+## Running locally
 
-#### Once the server is running, (or go to the [github page](https://jonathan-gartland.github.io/mpn-lookup-nextjs)) you can enter a number of positive wells and the component will return the most probable number.
+Requires Node 24 and pnpm.
 
-That's it.
+```bash
+git clone https://github.com/jonathan-gartland/mpn-lookup-nextjs.git
+cd mpn-lookup-nextjs
+pnpm install
+pnpm dev                     # http://localhost:3000/mpn-lookup-nextjs
+```
 
-#### The view including the MPN and confidence range after entering a positive well count of 51 for the QuantiTray
+```bash
+pnpm test                    # Jest unit and component tests
+pnpm exec playwright test    # e2e tests (starts the dev server itself)
+pnpm check-types && pnpm check-lint && pnpm check-format
+pnpm build                   # static export to out/
+```
 
-![QuantiTray](./public/qt.jpg "QuantiTray View")
+## Reference tables
 
-#### You may be thinking, this is very sparse - not much more than a wireframe.
+The MPN values come from the IDEXX reference tables:
+[Quanti-Tray (51-well)](https://www.idexx.com/files/51-well-quanti-tray-mpn-table-h-en.pdf),
+[Quanti-Tray/2000](https://www.idexx.com/files/qt97mpntable.pdf) and
+[Legiolert](https://www.idexx.com/files/quanti-tray-legiolert-mpn-table.pdf).
 
-#### I agree, feel free to fork and style it up.
+This project is not affiliated with or endorsed by IDEXX Laboratories. Quanti-Tray and Legiolert
+are trademarks of IDEXX Laboratories, Inc. Always confirm reportable results against the official
+IDEXX documentation for your test.
 
-# License
+## License
 
-This application is released under the [MIT license](LICENSE). You can use the code for any purpose, including commercial projects.
-
-[![license](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[MIT](./LICENSE) © Jonathan Gartland
